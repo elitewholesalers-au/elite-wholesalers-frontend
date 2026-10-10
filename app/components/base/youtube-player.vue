@@ -7,6 +7,8 @@
       :cookies="false"
       class="rounded-lg overflow-hidden shadow-lg"
       referrerpolicy="strict-origin-when-cross-origin"
+      :above-the-flow="true"
+      host="https://www.youtube-nocookie.com"
       frameborder="0"
       allow="
         accelerometer;
