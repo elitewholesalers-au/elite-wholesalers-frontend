@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import app from './app-config'
+
 export default defineNuxtConfig({
   ssr: true,
 
@@ -24,24 +26,20 @@ export default defineNuxtConfig({
     enabled: true
   },
 
-  app: {
-    head: {
-      charset: 'utf-8',
-      titleTemplate: 'Elite Wholesalers | %s ',
-      viewport: 'width=device-width, initial-scale=1',
-      link: [
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
-        { rel: 'shortcut icon', href: '/favicon/favicon.ico' },
-        { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' }
-      ]
-    }
-  },
+  app,
 
   css: ['~/assets/css/main.css'],
 
   ui: {
     colorMode: false
+  },
+
+  scripts: {
+    registry: {
+      youtubePlayer: {
+        trigger: 'onNuxtReady'
+      }
+    }
   },
 
   runtimeConfig: {},

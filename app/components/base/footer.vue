@@ -52,13 +52,23 @@
         <div>
           <h3 class="footer-title">Stay Connected</h3>
           <div class="flex gap-4">
-            <UButton icon="i-mdi-facebook" color="neutral" aria-label="Facebook" />
-            <UButton icon="i-mdi-instagram" color="neutral" aria-label="Instagram" />
-            <UButton icon="i-line-md-twitter-x" color="neutral" aria-label="Instagram" />
-            <UButton icon="i-mdi-youtube" color="neutral" aria-label="Instagram" />
+            <UButton
+              v-for="link in socialLinks"
+              :to="link.link"
+              :icon="link.icon"
+              color="neutral"
+              :aria-label="link.label"
+            />
           </div>
         </div>
       </div>
+      <ULink
+        to="https://www.verixinnovations.com"
+        target="_blank"
+        class="mx-auto block mt-12 text-center font-mono text-xxs! tracking-tight text-neutral-400/60 dark:text-neutral-600/60 hover:text-neutral-500 dark:hover:text-neutral-400 w-full"
+      >
+        v1.0 • verixinnovations.com
+      </ULink>
     </UContainer>
   </footer>
 </template>
@@ -72,6 +82,34 @@ const quickLinks = ref([
   { title: 'Contact Us', url: '/contact-us' },
   { title: 'About Us', url: '/about-us' },
   { title: 'Terms & Conditions', url: '/terms' }
+])
+
+const socialLinks = ref([
+  {
+    label: 'Facebook',
+    link: 'https://www.facebook.com/share/1abgNBEG1c',
+    icon: 'i-line-md-facebook'
+  },
+  {
+    label: 'Instagram',
+    link: 'https://www.instagram.com/elitewholesalers.com.au?igsh=d2dkZWh3Z3RyeTFh',
+    icon: 'i-line-md-instagram'
+  },
+  {
+    label: 'X',
+    link: 'https://x.com/elitewholesaler',
+    icon: 'i-line-md-twitter-x'
+  },
+  {
+    label: 'Youtube',
+    link: 'https://www.youtube.com/channel/UCjcbqkgtNvhe8Dksa5FUS8w',
+    icon: 'i-line-md-youtube'
+  },
+  {
+    label: 'Tiktok',
+    link: 'https://www.tiktok.com/',
+    icon: 'i-line-md-tiktok'
+  }
 ])
 
 const contactInfo = ref([

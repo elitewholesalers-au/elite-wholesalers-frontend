@@ -13,7 +13,7 @@ export const ZohoHelpers = {
     imageDocumentId,
     width = 600,
     height = 600,
-    storefrontDomain = 'www.elitewholesalersonline.com.au',
+    storefrontDomain = 'elitewholesalers.zohoecommerce.com',
     placeholderUrl = '/images/product-placeholder.png'
   }: ImageOptions): string {
     console.log({ imageName, imageDocumentId })
