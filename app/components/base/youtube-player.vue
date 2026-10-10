@@ -7,6 +7,17 @@
       :cookies="false"
       class="rounded-lg overflow-hidden shadow-lg"
       referrerpolicy="strict-origin-when-cross-origin"
+      frameborder="0"
+      allow="
+        accelerometer;
+        autoplay;
+        clipboard-write;
+        encrypted-media;
+        gyroscope;
+        picture-in-picture;
+        web-share;
+      "
+      allowfullscreen
       @ready="onReady"
       @state-change="stateChange"
     >
