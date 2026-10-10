@@ -53,19 +53,18 @@ export default defineNuxtConfig({
           'data:',
           'http://localhost:5050',
           'https://cdn1.zohoecommerce.com',
-          'https://elite-wholesalers-frontend.vercel.app',
-          'https://www.elitewholesalers.com.au',
-          'https://native.elitewholesalers.com.au',
           'http://api.elitewholesalers.com.au',
-          'https://www.youtube.com'
+          'https://www.youtube.com',
+          'https://www.googletagmanager.com'
         ],
         'frame-src': ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
         'connect-src': [
           "'self'",
           'http://localhost:5050',
           'http://api.elitewholesalers.com.au',
-          // 'https:*.google-analytics.com',
-          // 'https*.analytics.google.com',
+          'https://www.googletagmanager.com',
+          'https://www.google.com',
+
           process.env.VITE_API_URL || ''
         ].filter(Boolean),
         'script-src': [
@@ -79,7 +78,8 @@ export default defineNuxtConfig({
           "'self'",
           "'unsafe-inline'",
           'https://www.youtube.com',
-          'https://s.ytimg.com'
+          'https://s.ytimg.com',
+          'https://www.googletagmanager.com'
         ],
         'script-src-attr': ["'unsafe-inline'"], // Fixes the inline event handler error
         'style-src': ["'self'", "'unsafe-inline'"]

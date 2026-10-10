@@ -12,6 +12,8 @@
       <div class="bg-white py-8">
         <UContainer class="mx-auto px-4 lg:px-6">
           <HomeTrendingProducts />
+
+          <BaseYoutubePlayer />
         </UContainer>
       </div>
     </div>
