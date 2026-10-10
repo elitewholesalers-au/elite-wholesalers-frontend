@@ -57,7 +57,12 @@ export default defineNuxtConfig({
           'https://www.youtube.com',
           'https://www.googletagmanager.com'
         ],
-        'frame-src': ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
+        'frame-src': [
+          "'self'",
+          'https://www.youtube.com',
+          'https://youtube.com',
+          'https://www.youtube-nocookie.com'
+        ],
         'connect-src': [
           "'self'",
           'http://localhost:5050',
@@ -83,6 +88,15 @@ export default defineNuxtConfig({
         ],
         'script-src-attr': ["'unsafe-inline'"], // Fixes the inline event handler error
         'style-src': ["'self'", "'unsafe-inline'"]
+      },
+      crossOriginEmbedderPolicy: 'unsafe-none',
+      permissionsPolicy: {
+        'picture-in-picture': [
+          "'self'",
+          'https://www.youtube.com',
+          'https://www.youtube-nocookie.com'
+        ],
+        fullscreen: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com']
       }
     }
   },

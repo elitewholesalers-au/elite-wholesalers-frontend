@@ -6,7 +6,7 @@
         video-id="xArTod5Rz6o"
         @ready="isLoaded = true"
         :above-the-fold="true"
-        :cookies="true"
+        :cookies="false"
         @state-change="stateChange"
       >
         <template #awaitingLoad>
