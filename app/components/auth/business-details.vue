@@ -7,6 +7,19 @@
     @submit="$emit('continue')"
   >
     <div class="grid gap-5 w-full">
+      <UFormField label="Business name" name="business_name" required class="w-full">
+        <UInput
+          v-model="signupBusinessDetails.business_name"
+          placeholder="Your registered business name"
+          icon="i-lucide-building-2"
+          class="w-full"
+          :ui="{
+            base:
+              signupBusinessDetails.business_name === abnDetails.businessName ? 'text-success' : ''
+          }"
+        />
+      </UFormField>
+
       <UFormField label="ABN" name="abn" required>
         <UInput
           v-model="signupBusinessDetails.abn"
@@ -53,7 +66,7 @@
           </div>
         </template>
       </UFormField>
-      <UFormField label="ACN" name="acn">
+      <!-- <UFormField label="ACN" name="acn" optional>
         <UInput
           v-model="signupBusinessDetails.acn"
           placeholder="Your 9-digit ACN"
@@ -61,22 +74,8 @@
           icon="i-lucide-hash"
           class="w-full"
         />
-      </UFormField>
+      </UFormField> -->
     </div>
-
-    <UFormField label="Business name" name="business_name" required class="w-full">
-      <UInput
-        v-model="signupBusinessDetails.business_name"
-        placeholder="Your registered business name"
-        icon="i-lucide-building-2"
-        :disabled="!abnDetails.isValid"
-        class="w-full"
-        :ui="{
-          base:
-            signupBusinessDetails.business_name === abnDetails.businessName ? 'text-success' : ''
-        }"
-      />
-    </UFormField>
 
     <div class="grid gap-5 w-full">
       <UFormField label="Business type" name="business_type" required class="w-full">
@@ -175,12 +174,7 @@
         block
         size="xl"
         :loading="formState?.loading"
-        :disabled="
-          formState?.errors.length !== 0 ||
-          formState?.loading ||
-          !abnDetails.isValid ||
-          !licenceDetails.isValid
-        "
+        :disabled="formState?.errors.length !== 0 || formState?.loading || !abnDetails.isValid"
       >
         <span>Continue</span>
         <UIcon name="i-lucide-arrow-right" />
