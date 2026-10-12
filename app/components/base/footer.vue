@@ -56,6 +56,7 @@
               v-for="link in socialLinks"
               :to="link.link"
               :icon="link.icon"
+              rel="nofollow"
               color="neutral"
               :aria-label="link.label"
             />
@@ -65,6 +66,7 @@
       <ULink
         to="https://www.verixinnovations.com"
         target="_blank"
+        rel="nofollow"
         class="mx-auto block mt-12 text-center font-mono text-xxs! tracking-tight text-neutral-400/60 dark:text-neutral-600/60 hover:text-neutral-500 dark:hover:text-neutral-400 w-full"
       >
         v1.0 • verixinnovations.com
