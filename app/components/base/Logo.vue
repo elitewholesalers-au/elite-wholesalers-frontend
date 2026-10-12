@@ -1,7 +1,7 @@
 <template>
-  <RouterLink :to="{ name: RouteName.Home }">
-    <NuxtImg :src="variant" v-bind="$attrs" class="shrink-0 block h-10" />
-  </RouterLink>
+  <NuxtLink class="block" aria-current="page" :to="{ name: RouteName.Home }">
+    <NuxtImg :src="variant" v-bind="$attrs" attrs="Brand Logo" class="shrink-0 block h-10" />
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">

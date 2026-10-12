@@ -1,5 +1,6 @@
 <template>
   <div
+    fetchpriority="high"
     class="relative flex bg-[url('/images/slider/banner.png')] h-[40dvh] bg-contain bg-top lg:h-[60dvh] bg-repeat w-full"
   >
     <div class="absolute size-full z-1 bg-[rgba(16,73,142,0.6)] opacity-50"></div>

@@ -7,7 +7,7 @@ const appConfig: Partial<NuxtAppConfig> = {
     title: 'Elite Wholesalers | Australia’s Trusted Security & Electronics Suppliers',
     titleTemplate: 'Elite Wholesalers | %s',
     viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
-    htmlAttrs: { lang: 'en' },
+    htmlAttrs: { lang: 'en-AU' },
     bodyAttrs: { class: 'overflow-x-hidden' },
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -30,7 +30,7 @@ const appConfig: Partial<NuxtAppConfig> = {
       },
       {
         name: 'twitter:image',
-        content: 'https://www.elitewholesalersonline.com.au/logo.png'
+        content: 'https://www.elitewholesalers.com.au/logo.png'
       },
       {
         name: 'twitter:description',
@@ -45,22 +45,22 @@ const appConfig: Partial<NuxtAppConfig> = {
         content: 'Elite Wholesalers | Australia’s Trusted Security & Electronics Suppliers'
       },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://www.elitewholesalersonline.com.au/' },
+      { property: 'og:url', content: 'https://www.elitewholesalers.com.au/' },
       {
         property: 'og:image',
-        content: 'https://www.elitewholesalersonline.com.au/logo.png'
+        content: 'https://www.elitewholesalers.com.au/logo.png'
       },
       {
         name: 'keywords',
         content:
-          'Elite Wholesalers, elite wholesalers, security wholesaler Sydney, commercial security equipment supplier Australia, trade security wholesale Peakhurst, wholesale security products online store, CCTV wholesale Australia, IP cameras wholesale, network video recorders NVR, Milesight cameras Australia, Dahua security cameras, PTZ dome camera, LPR ANPR traffic cameras, fisheye security camera, super WDR pro camera, access control systems wholesale, electric strikes, keypads access control, intercom systems Australia, Bticino intercom, 2 wire video intercom kit, security alarm systems, Bosch alarm systems, Crow alarm parts, electronic door locks, frameless glass locks, automatic door hardware, PoE switches wholesale, PoE extenders, network transmission products, 5G AIoT suite, smart remote management solution, IoT devices wholesale, radar AI traffic scanner, tailgate assist, vehicle remote start, GME automotive, Milesight Australia distributor, Dahua wholesale Australia, Bosch security wholesale, Crow alarms supplier, Bticino intercoms Australia'
+          'Elite Wholesalers, elite wholesalers, Elite alarms, Akuvox Intercom, PIXIE Automation, TP Link, security wholesaler Sydney, commercial security equipment supplier Australia, trade security wholesale Peakhurst, wholesale security products online store, CCTV wholesale Australia, IP cameras wholesale, network video recorders NVR, Milesight cameras Australia, Dahua security cameras, PTZ dome camera, LPR ANPR traffic cameras, fisheye security camera, super WDR pro camera, access control systems wholesale, electric strikes, keypads access control, intercom systems Australia, Bticino intercom, 2 wire video intercom kit, security alarm systems, Bosch alarm systems, Crow alarm parts, electronic door locks, frameless glass locks, automatic door hardware, PoE switches wholesale, PoE extenders, network transmission products, 5G AIoT suite, smart remote management solution, IoT devices wholesale, radar AI traffic scanner, tailgate assist, vehicle remote start, GME automotive, Milesight Australia distributor, Dahua wholesale Australia, Bosch security wholesale, Crow alarms supplier, Bticino intercoms Australia'
       },
       { name: 'language', content: 'English' },
       { property: 'og:locale', content: 'en_AU' },
       { property: 'og:site_name', content: 'Elite Wholesalers' },
       {
         property: 'og:image:secure_url',
-        content: 'https://www.elitewholesalersonline.com.au/logo.png'
+        content: 'https://www.elitewholesalers.com.au/logo.png'
       },
       { property: 'og:image:type', content: 'image/png' },
       {
@@ -83,7 +83,7 @@ const appConfig: Partial<NuxtAppConfig> = {
         rel: 'preconnect',
         crossorigin: 'anonymous'
       },
-      { rel: 'canonical', href: 'https://www.elitewholesalersonline.com.au' }
+      { rel: 'canonical', href: 'https://www.elitewholesalers.com.au' }
     ],
     script: [
       {
@@ -93,8 +93,8 @@ const appConfig: Partial<NuxtAppConfig> = {
           '@type': 'Organization',
           name: 'Elite Wholesalers',
           alternateName: ['Elite Wholesalers Pty Ltd', 'Elite Wholesalers Online'],
-          url: 'https://www.elitewholesalersonline.com.au',
-          logo: 'https://www.elitewholesalersonline.com.au/logo.png',
+          url: 'https://www.elitewholesalers.com.au',
+          logo: 'https://www.elitewholesalers.com.au/logo.png',
           description:
             'Australia’s trusted commercial security equipment supplier and wholesale security products online store for CCTV, Alarms, Intercoms, Access Control, and Smart IoT Solutions.',
           address: {

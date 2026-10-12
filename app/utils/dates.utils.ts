@@ -10,7 +10,7 @@ export const DateFunctions = {
     if (date.toDateString() === today.toDateString()) return 'Today'
     else if (date.toDateString() === yesterday.toDateString()) return 'Yesterday'
     else
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleDateString('en-AU', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'
@@ -64,7 +64,7 @@ export const DateFunctions = {
     if (date.toDateString() === today.toDateString()) return this.getTime(date)
     else if (date.toDateString() === yesterday.toDateString()) return 'Yesterday'
     else
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleDateString('en-AU', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'

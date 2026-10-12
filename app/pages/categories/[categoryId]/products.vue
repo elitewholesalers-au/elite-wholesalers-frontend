@@ -92,7 +92,7 @@
       </div>
     </div>
     <div v-else class="py-20 text-center flex flex-col justify-center">
-      <NuxtImg src="/images/empty-data.svg" class="mx-auto max-h-60" />
+      <NuxtImg src="/images/empty-data.svg" alt="empty product" class="mx-auto max-h-60" />
       <h2 class="mt-5 font-oswald text-3xl text-neutral-900">No product in this category</h2>
     </div>
   </UContainer>
@@ -181,7 +181,6 @@ const categoryParentsBreadcrumb = computed(() => {
 })
 
 onMounted(() => {
-  console.log({ categoryId: route.params.categoryId })
   productStore.getProductByCategoryId(route.params.categoryId as string)
 })
 </script>

@@ -20,7 +20,11 @@
         </div>
       </div>
 
-      <NuxtImg src="/images/about-us/emu-in-sky-project.png" class="w-full lg:col-span-2" />
+      <NuxtImg
+        src="/images/about-us/emu-in-sky-project.png"
+        alt-="emu-sky-project"
+        class="w-full lg:col-span-2"
+      />
     </div>
 
     <!-- What Do We Deliver Section -->

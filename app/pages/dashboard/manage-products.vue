@@ -53,6 +53,7 @@
                 imageDocumentId: row.original.image_document_id
               })
             "
+            :alt="row.original.name"
             class="w-9 h-9 rounded bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden border border-gray-200 dark:border-gray-700"
           />
         </template>

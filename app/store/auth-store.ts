@@ -134,7 +134,6 @@ export const useAuthStore = defineStore('AuthStore', {
         cartStore.fetchCart()
         return router.replace({ name: RouteName.Home })
       } else {
-        console.log(res.message)
         toast.add({ description: res.message })
       }
       return res

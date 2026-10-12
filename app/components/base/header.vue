@@ -51,7 +51,11 @@
               class="flex gap-x-2 items-center"
               @click="router.push({ name: RouteName.ProductDetails, params: { id: item.item_id } })"
             >
-              <img :src="item.product_image" class="size-8 sm:size-10 object-cover rounded" />
+              <img
+                :src="item.product_image"
+                :alt="item.name"
+                class="size-8 sm:size-10 object-cover rounded"
+              />
               <h2 class="text-xs line-clamp-1 overflow-hidden text-ellipsis">{{ item.label }}</h2>
             </div>
           </template>
@@ -189,7 +193,16 @@ const items = computed<NavigationMenuItem[]>(() => [
   }
 ])
 
-const dashboardNavigation = ref([
+const dashboardNavigation = ref<
+  {
+    label: string
+    to?: string
+    icon: string
+    class?: string
+    color?: string
+    onSelect?: () => any
+  }[]
+>([
   { label: 'Dashboard', to: '/dashboard', icon: 'i-lucide-layout-dashboard' },
   { label: 'Profile', to: '/dashboard/profile', icon: 'i-lucide-user-round' },
   { label: 'My orders', to: '/dashboard/orders', icon: 'i-lucide-package-check' },

@@ -99,7 +99,7 @@
             :key="line.line_item_id"
             class="flex items-center gap-4 p-4 sm:p-5"
           >
-            <img
+            <NuxtImg
               :src="
                 ZohoHelpers.getZohoProductImageUrl({
                   imageName: line.image_name,

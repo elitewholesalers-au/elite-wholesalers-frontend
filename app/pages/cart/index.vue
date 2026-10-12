@@ -11,7 +11,7 @@
     </div>
 
     <div v-if="cartItems.length === 0" class="py-20 text-center flex flex-col justify-center">
-      <NuxtImg src="/images/empty-cart.svg" class="mx-auto max-h-60" />
+      <NuxtImg src="/images/empty-cart.svg" alt-="empty cart" class="mx-auto max-h-60" />
       <h2 class="mt-5 font-oswald text-3xl text-neutral-900">Your cart is empty</h2>
       <p class="mt-2 text-sm text-neutral-500">Find something worth stocking up on.</p>
       <UButton

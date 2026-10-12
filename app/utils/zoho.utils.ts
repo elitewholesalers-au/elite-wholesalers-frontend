@@ -16,7 +16,6 @@ export const ZohoHelpers = {
     storefrontDomain = 'elitewholesalers.zohoecommerce.com',
     placeholderUrl = '/images/product-placeholder.png'
   }: ImageOptions): string {
-    console.log({ imageName, imageDocumentId })
     if (!imageName || !imageDocumentId) {
       return placeholderUrl
     }
@@ -29,7 +28,6 @@ export const ZohoHelpers = {
     const encodedDomain = encodeURIComponent(storefrontDomain)
 
     const zohoImage = `https://cdn1.zohoecommerce.com/product-images/${encodedImageName}/${encodedDocId}/${width}x${height}?storefront_domain=${encodedDomain}`
-    console.log(zohoImage)
 
     return zohoImage
   }

@@ -8,7 +8,7 @@
       type: 'tel'
     }"
     class="rounded-4xl! py-0.5! px-1!"
-    :preferred-countries="['AU', 'US', 'NG']"
+    :preferred-countries="['AU', 'US']"
     @validate="validatePhoneNumber"
     v-bind="$attrs"
   />

@@ -17,7 +17,11 @@
       }"
     >
       <div class="" v-for="partner in partners" :key="partner.name" :repeat="10">
-        <LazyNuxtImg :src="'/images/partners/' + partner.logo" class="max-h-5 md:max-h-10" />
+        <LazyNuxtImg
+          :src="'/images/partners/' + partner.logo"
+          :alt="partner.name"
+          class="max-h-5 md:max-h-10"
+        />
       </div>
     </UMarquee>
   </section>

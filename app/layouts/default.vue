@@ -2,9 +2,9 @@
   <div class="min-h-dvh w-full flex flex-col">
     <BaseGlobalInfo />
     <BaseHeader class="w-full" />
-    <div class="flex-1">
+    <main class="flex-1">
       <slot />
-    </div>
+    </main>
     <BaseFooter />
   </div>
 </template>

@@ -92,7 +92,7 @@ const socialLinks = ref([
   },
   {
     label: 'Instagram',
-    link: 'https://www.instagram.com/elitewholesalers.com.au?igsh=d2dkZWh3Z3RyeTFh',
+    link: 'https://www.instagram.com/elitewholesalers.com.au',
     icon: 'i-line-md-instagram'
   },
   {
