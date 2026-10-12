@@ -6,11 +6,10 @@ const appConfig: Partial<NuxtAppConfig> = {
     charset: 'utf-8',
     title: 'Elite Wholesalers | Australia’s Trusted Security & Electronics Suppliers',
     titleTemplate: 'Elite Wholesalers | %s',
-    viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
     htmlAttrs: { lang: 'en-AU' },
     bodyAttrs: { class: 'overflow-x-hidden' },
     meta: [
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
       {
         'http-equiv': 'Content-Security-Policy',
         content: 'upgrade-insecure-requests'
