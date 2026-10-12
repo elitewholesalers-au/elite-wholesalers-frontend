@@ -19,7 +19,7 @@
           :class="modelValue === option.value ? 'text-primary' : 'text-muted'"
         />
         <span
-          class="block font-semibold"
+          class="block font-semibold text-sm"
           :class="modelValue === option.value ? 'text-primary' : 'text-muted'"
           >{{ option.label }}</span
         >
@@ -47,13 +47,13 @@ const emit = defineEmits(['continue'])
 const options = [
   {
     value: AccountType.TRADER,
-    label: 'I am a Trader',
+    label: 'I am a Trade Customer',
     description: 'Source products for a shop, company, or growing retail operation.',
     icon: 'i-lucide-building-2'
   },
   {
     value: AccountType.INDIVIDUAL,
-    label: 'I am an Individual',
+    label: 'I am an Retail Customer',
     description: 'Join the marketplace as an independent buyer.',
     icon: 'i-lucide-user-round'
   }

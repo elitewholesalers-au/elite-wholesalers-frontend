@@ -7,7 +7,7 @@
     @submit="$emit('continue')"
   >
     <div class="grid gap-5 w-full">
-      <UFormField label="Business name" name="business_name" required class="w-full">
+      <UFormField label="Business name/Trading Name" name="business_name" required class="w-full">
         <UInput
           v-model="signupBusinessDetails.business_name"
           placeholder="Your registered business name"
@@ -201,11 +201,11 @@ const businessTypes = [
 const industries = ref([
   { label: 'Electrical Contractor', value: 'electric-contractor' },
   { label: 'Security Installer', value: 'security-installer' },
-  { label: 'Auto Electrician', value: 'auto-electrician' },
+  { label: 'Auto Electrician', value: 'auto-electrician' }
   // { label: 'Alarm Installer', value: 'alarm-installer' },
   // { label: 'CCTV Technician', value: 'cctv-technician' },
   // { label: 'Access Control', value: 'access-control' },
-  { label: 'Others', value: 'others' }
+  // { label: 'Others', value: 'others' }
 ])
 
 const stateIssued = ref([

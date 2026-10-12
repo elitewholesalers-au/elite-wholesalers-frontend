@@ -6,7 +6,8 @@ export const RouteName = {
     SignUp: 'Register global',
     ResetPassword: 'Reset Password global',
     ForgotPassword: 'Forgot Password global',
-    Verify: 'Verify global'
+    Verify: 'Verify global',
+    LoginVerify: 'Login Verify global'
   },
 
   Categories: 'Categories global',

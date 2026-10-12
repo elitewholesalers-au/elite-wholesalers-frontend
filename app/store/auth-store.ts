@@ -118,16 +118,28 @@ export const useAuthStore = defineStore('AuthStore', {
   },
 
   actions: {
-    async login(data: { email: string; password: string }, showToast: boolean) {
+    async login(data: { email: string; password: string }) {
+      const router = useRouter()
+      const toast = useToast()
+      const res = await AuthService.login(data)
+      if (res.success) {
+        router.push({ name: RouteName.Auth.LoginVerify, query: { email: data.email } })
+      } else {
+        toast.add({ description: res.message })
+      }
+      return res
+    },
+
+    async verifyLoginOTP(data: VerifyOTP) {
       const router = useRouter()
       const toast = useToast()
       const route = useRoute()
       const cartStore = useCartStore()
-      const res = await AuthService.login(data)
+      const res = await AuthService.verifyLoginOTP(data)
       if (res.success) {
         ApiService.setAccessToken(res.data.access_token)
         this.user = res.data.user
-        if (showToast) toast.add({ title: 'Login Successful!' })
+        toast.add({ title: 'Login Successful!' })
         if (route.redirectedFrom) {
           return router.replace({ path: route.redirectedFrom.fullPath })
         }
@@ -141,11 +153,13 @@ export const useAuthStore = defineStore('AuthStore', {
 
     async signupUser(data: SignupDetails) {
       const toast = useToast()
+      const router = useRouter()
       this.loadingState.signup = true
       const res = await AuthService.signup(data)
       this.loadingState.signup = false
       if (res.success) {
-        await this.login({ email: data.email ?? '', password: data?.password ?? '' }, false)
+        // await this.login({ email: data.email ?? '', password: data?.password ?? '' }, false)
+        router.replace({ name: RouteName.Auth.Login })
         toast.add({ title: res.message })
       }
       return res

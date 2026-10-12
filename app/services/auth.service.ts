@@ -41,6 +41,14 @@ export const AuthService = {
     })
   },
 
+  async verifyLoginOTP(data: VerifyOTP) {
+    return await ApiService.run({
+      method: ApiService.POST,
+      url: '/auth/verify-login',
+      data
+    })
+  },
+
   async logout(userId: string) {
     return await ApiService.run({
       method: ApiService.POST,

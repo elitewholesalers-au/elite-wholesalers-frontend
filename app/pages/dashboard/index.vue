@@ -1,16 +1,7 @@
 <template>
   <section>
     <header class="border-b border-neutral-200 pb-6">
-      <p
-        class="text-xs font-bold uppercase tracking-[0.16em] text-primary-500"
-        :class="{
-          'text-primary': user?.accountType === AccountType.INDIVIDUAL,
-          'text-success-500': user?.accountType === AccountType.TRADER,
-          'text-rose-600': user?.accountType === AccountType.ADMIN
-        }"
-      >
-        {{ user?.accountType }} Account
-      </p>
+      <BaseAccountType :accountType="user?.accountType" />
       <h1 class="mt-2 font-oswald text-4xl font-medium text-neutral-950">
         <span class="text-2xl block">{{ DateFunctions.getLocalGreeting() }},</span>
         <span class="">{{ user?.fullname }}</span>

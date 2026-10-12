@@ -98,6 +98,6 @@ const state = ref<Partial<Schema>>({
 })
 
 const signInUser = async (values: FormSubmitEvent<Schema>) => {
-  await authStore.login(values.data, true)
+  await authStore.login(values.data)
 }
 </script>

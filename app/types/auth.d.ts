@@ -39,7 +39,7 @@ export interface LoginPayload {
 
 export interface VerifyOTP {
   email: string
-  token: string
+  verification_code: string
 }
 
 export interface ForgotPassword {
