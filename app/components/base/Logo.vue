@@ -1,6 +1,6 @@
 <template>
   <NuxtLink class="block" aria-current="page" :to="{ name: RouteName.Home }">
-    <NuxtImg :src="variant" v-bind="$attrs" attrs="Brand Logo" class="shrink-0 block h-10" />
+    <NuxtImg :src="variant" v-bind="$attrs" alt="Brand Logo" class="shrink-0 block h-10" />
   </NuxtLink>
 </template>
 
