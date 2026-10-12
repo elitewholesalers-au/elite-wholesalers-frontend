@@ -128,7 +128,7 @@ const contactInfo = ref([
 const locations = ref([
   {
     title: 'HEAD OFFICE & SHOWROOM',
-    address: '1/9 Street Peakhurst NSW 2210'
+    address: '1/9 Stanley Street Peakhurst NSW 2210'
   },
   {
     title: 'ADMIN & SALES OFFICE',

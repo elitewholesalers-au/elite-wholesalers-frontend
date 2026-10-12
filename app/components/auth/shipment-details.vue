@@ -33,7 +33,7 @@
       />
     </UFormField>
 
-    <UFormField label="City" name="city" required>
+    <UFormField label="Subhub" name="city" required>
       <USelectMenu
         value-key="name"
         label-key="name"

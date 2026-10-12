@@ -109,7 +109,9 @@
           placeholder="Your licence number"
           leadingIcon="i-lucide-badge-check"
           class="w-full"
-          @change="handleLicenseInput"
+        />
+
+        <!-- @change="handleLicenseInput"
           :ui="{
             base:
               !signupBusinessDetails.license_number ||
@@ -143,14 +145,13 @@
           <p v-if="licenceDetails.errorReason" class="text-error">
             {{ licenceDetails.errorReason }}
           </p>
-        </template>
+        </template> -->
       </UFormField>
       <UFormField label="Issuing state" name="stateIssued" required>
         <USelectMenu
           v-model="signupBusinessDetails.stateIssued"
           :items="stateIssued"
           value-key="value"
-          @change="handleLicenseInput"
           placeholder="Select a state"
           icon="i-lucide-map-pin"
         />
