@@ -82,7 +82,6 @@ const quickLinks = ref([
   { title: 'About Us', url: '/about-us' },
   { title: 'Download Center', url: '/download-center' },
   { title: 'Contact Us', url: '/contact-us' },
-  { title: 'About Us', url: '/about-us' },
   { title: 'Terms & Conditions', url: '/terms' }
 ])
 
