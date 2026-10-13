@@ -70,6 +70,7 @@ export const useAdminStore = defineStore('AdminStore', {
       const res = await AdminService.deleteUser(userId)
       if (res.success) {
         toast.add({ title: 'User account deleted successfully' })
+        await this.getAdminUsers()
       }
       this.loadingStates.deleteUser = false
     },

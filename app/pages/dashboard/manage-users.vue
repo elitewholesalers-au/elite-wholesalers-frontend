@@ -11,15 +11,33 @@
       </div>
     </header>
 
+    <div class="flex flex-col my-5 sm:flex-row items-center justify-between gap-4">
+      <UInput
+        v-model="searchQuery"
+        icon="i-lucide-search"
+        placeholder="Search users"
+        size="sm"
+        class="w-full sm:w-80"
+        clearable
+      />
+    </div>
+
     <UCard :ui="{ body: '' }">
       <UTable
         :data="users"
         :columns="columns"
+        v-model:global-filter="searchQuery"
         :ui="{
           td: 'py-2 px-3 text-xs',
           th: 'py-2.5 px-3 text-xs font-semibold'
         }"
       >
+        <template #created_at-cell="{ row }">
+          <span class="text-gray-700 dark:text-gray-300 font-medium">
+            {{ DateFunctions.formatShortDateTime(row.original.created_at) || '—' }}
+          </span>
+        </template>
+
         <template #business_name-cell="{ row }">
           <span class="text-gray-700 dark:text-gray-300 font-medium">
             {{ row.original.business_details?.business_name || '—' }}
@@ -29,7 +47,7 @@
         <!-- Zoho Contact ID Cell -->
         <template #zohoContactId-cell="{ row }">
           <span class="text-gray-500 dark:text-gray-400 font-mono text-[11px]">
-            {{ row.original.zohoContactId || '—' }}
+            {{ row.original?.zohoContactId || '—' }}
           </span>
         </template>
 
@@ -147,6 +165,7 @@
               variant="outline"
               size="sm"
               class="rounded-md! px-5"
+              :disabled="loadingStates.deleteUser"
               @click="deleteModalOpen = false"
             />
             <UButton
@@ -154,8 +173,8 @@
               color="error"
               size="sm"
               class="rounded-md! px-5"
-              :disabled="user?.id === userToDelete.id"
-              :loading="loadingStates.updatingRole"
+              :disabled="user?.id === userToDelete?.id"
+              :loading="loadingStates.deleteUser"
               @click="confirmDelete"
             />
           </div>
@@ -171,7 +190,6 @@ import { storeToRefs } from 'pinia'
 import { useAdminStore } from '~/store/admin-store'
 import { AccountType } from '~/types/enums'
 import { useAuthStore } from '~/store/auth-store'
-import { DateFunctions } from '~/utils/dates.utils'
 
 definePageMeta({
   layout: 'dashboard',
@@ -189,9 +207,11 @@ const { users, loadingStates } = storeToRefs(adminStore)
 const { user } = storeToRefs(useAuthStore())
 const deleteModalOpen = ref(false)
 const userToDelete = ref<any>(null)
+const searchQuery = ref('')
 
 // Table Columns configuration including business name
 const columns = [
+  { accessorKey: 'created_at', header: 'Created At' },
   { accessorKey: 'fullname', header: 'Full Name' },
   { accessorKey: 'accountType', header: 'Account Type' },
   { accessorKey: 'username', header: 'Username' },

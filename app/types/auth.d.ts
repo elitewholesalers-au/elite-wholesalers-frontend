@@ -25,6 +25,8 @@ export interface UserEntity {
   gender: string
   date_of_birth: string | null
   phone_number: string
+  created_at: string
+  updated_at: string
   location: LocationEntity
   business_details?: BusinessDetails
   bio: string | null

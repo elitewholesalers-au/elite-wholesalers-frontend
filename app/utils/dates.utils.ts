@@ -75,6 +75,10 @@ export const DateFunctions = {
     return format(new Date(date), 'MMMM d, yyyy hh:mm a')
   },
 
+  formatShortDateTime(date: Date | string) {
+    return format(new Date(date), 'MMM d, yy hh:mm a')
+  },
+
   formatTime(date: Date | string) {
     return format(new Date(date), 'hh:mm a')
   },
