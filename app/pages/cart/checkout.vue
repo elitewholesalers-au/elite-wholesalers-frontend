@@ -132,7 +132,7 @@
           </template>
 
           <!-- Disabled Checkout Action when address is missing -->
-          <div class="flex gap-4">
+          <div class="flex flex-col-reverse md:flex-row gap-4">
             <UButton variant="outline" class="w-full text-center px-10 justify-center">
               <NuxtLink to="/cart" class="text-sm items-center flex gap-x-2">
                 <UIcon name="i-lucide-arrow-left" />
