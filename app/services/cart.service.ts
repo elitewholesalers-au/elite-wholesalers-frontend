@@ -17,10 +17,11 @@ export const CartService = {
     })
   },
 
-  async initializeCheckout() {
+  async initializeCheckout(data: { delivery_method: DeliveryMethod }) {
     return await ApiService.run({
       method: ApiService.POST,
-      url: '/cart/checkout'
+      url: '/cart/checkout',
+      data
     })
   },
 

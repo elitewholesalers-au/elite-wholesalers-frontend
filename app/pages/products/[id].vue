@@ -36,7 +36,16 @@
         </div>
 
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <BaseAddToCart v-if="isLoggedIn" class="md:w-fit px-10!" />
+          <BaseAddToCart
+            v-if="isLoggedIn && product !== null"
+            class="md:w-fit px-10!"
+            :imageUrl="
+              ZohoHelpers.getZohoProductImageUrl({
+                imageName: product?.documents?.[0].file_name,
+                imageDocumentId: product?.documents?.[0].document_id
+              })
+            "
+          />
           <BaseAuthButton color="neutral" class="md:w-fit px-10!" v-else size="lg">
             <span class="font-semibold mx-auto">View Pricing</span>
           </BaseAuthButton>
@@ -102,10 +111,15 @@ const getProductImages = (product: any) => {
 
 const hasProductSpecs = computed(() => {
   const customFields = product?.value?.custom_fields || []
-  const specsFieldIndex = customFields.findIndex(
-    (field) => field.api_name === 'cf_product_specs' || field.label === 'product_specs'
+  const specsFieldIndex = customFields.findIndex((field) => field.label === 'product_specs')
+  const hasSpecsFile = specsFieldIndex >= 0
+
+  if (!hasSpecsFile) return false
+
+  const showProductSpecsIndex = customFields.findIndex(
+    (field) => field.label === 'show_product_specs' && field.value === true
   )
-  return specsFieldIndex >= 0
+  return showProductSpecsIndex >= 0
 })
 
 function downloadProductSpecs() {

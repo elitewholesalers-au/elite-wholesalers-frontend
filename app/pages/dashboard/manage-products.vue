@@ -40,6 +40,7 @@
         :data="paginatedProducts"
         :columns="columns"
         v-model:global-filter="searchQuery"
+        @select="(e, row) => $router.push(`/products/${row.original.item_id}`)"
         :ui="{
           td: 'py-2 px-3 text-xs text-wrap',
           th: 'py-2.5 px-3 text-xs font-semibold'
@@ -92,10 +93,10 @@
             <BaseUploadProductSpecs
               size="sm"
               class="text-xs"
-              :variant="Boolean(row.original?.cf_product_specs) ? 'solid' : 'outline'"
+              :variant="hasProductSpecs(row.original) ? 'solid' : 'outline'"
               color="neutral"
               :loading="loadingStates.uploadingSpecs && selectedProductId === row.original.item_id"
-              :hasProductSpecs="Boolean(row.original?.cf_product_specs)"
+              :hasProductSpecs="hasProductSpecs(row.original)"
               @updated="adminStore.getAdminProducts(query)"
               :product="row.original"
             />
@@ -143,6 +144,7 @@ import { ref, computed } from 'vue'
 import { useAdminStore } from '~/store/admin-store'
 import { useAuthStore } from '~/store/auth-store'
 import { Currency } from '~/types/enums'
+import type { ProductEntity } from '~/types/product'
 
 const adminStore = useAdminStore()
 const { products, categories, loadingStates } = storeToRefs(adminStore)
@@ -177,6 +179,13 @@ const paginatedProducts = computed(() => {
   const end = start + pagination.value.pageSize
   return products.value.slice(start, end)
 })
+
+const hasProductSpecs = (product: ProductEntity) => {
+  if (product.cf_product_specs && product.cf_show_product_specs_unformatted === true) {
+    return true
+  }
+  return false
+}
 
 const columns = [
   { accessorKey: 'item_id', header: 'Image', class: 'w-16' },

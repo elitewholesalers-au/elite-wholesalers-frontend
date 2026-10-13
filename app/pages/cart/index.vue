@@ -33,7 +33,14 @@
             :to="`/products/${item?.itemId}`"
             class="size-24 shrink-0 overflow-hidden bg-surface-container-low sm:size-32"
           >
-            <img
+            <NuxtImg
+              v-if="item?.imageUrl"
+              :src="item?.imageUrl"
+              :alt="item?.product?.name"
+              class="size-full object-cover"
+            />
+            <NuxtImg
+              v-else
               :src="productImage(item?.product)"
               :alt="item?.product?.name"
               class="size-full object-cover"
@@ -133,7 +140,7 @@ const { cartItems, subtotal, itemCount } = storeToRefs(cartStore)
 
 function productImage(prod: ProductEntity | ProductDataEntity | null): string {
   if (!prod) return ''
-
+  console.log({ prod })
   const imageDocumentId =
     'image_document_id' in prod
       ? prod.image_document_id

@@ -103,6 +103,16 @@ export const useAdminStore = defineStore('AdminStore', {
       this.loadingStates.uploadingSpecs = false
     },
 
+    async deleteProductSpecs(productId: string) {
+      const toast = useToast()
+      this.loadingStates.uploadingSpecs = true
+      const res = await AdminService.deleteSpecs(productId)
+      if (res.success) {
+        toast.add({ title: 'Product specs deleted successfully' })
+      }
+      this.loadingStates.uploadingSpecs = false
+    },
+
     // --- Firmware Categories Actions ---
     async fetchCategories() {
       const res = await AdminService.getFirmwareCategories()

@@ -22,17 +22,19 @@
         <h1 class="mt-2 font-oswald text-4xl font-medium text-neutral-950">
           {{ order.salesorder_number }}
         </h1>
-        <p class="mt-1 text-sm text-neutral-500">Placed on {{ formatDate(order.date) }}</p>
+        <p class="mt-1 text-sm text-neutral-500">
+          Placed on {{ DateFunctions.formatShortDateTime(order.created_time) }}
+        </p>
       </div>
 
       <!-- Essential Order Info Cards (Zoho Statuses) -->
       <div class="mt-6 grid gap-4 sm:grid-cols-3">
         <div class="rounded-xl border border-neutral-200 p-4">
-          <p class="text-xs font-bold uppercase tracking-wider text-neutral-400">Order Status</p>
-          <p class="mt-1 font-medium capitalize text-neutral-900">{{ order.order_status }}</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-neutral-400">Delivery Method</p>
+          <p class="mt-1 font-medium capitalize text-neutral-900">{{ order.delivery_method }}</p>
         </div>
         <div class="rounded-xl border border-neutral-200 p-4">
-          <p class="text-xs font-bold uppercase tracking-wider text-neutral-400">Shipping Status</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-neutral-400">Delivery Status</p>
           <p class="mt-1 font-medium capitalize text-neutral-900">{{ order.shipped_status }}</p>
         </div>
         <div class="flex justify-between rounded-xl border border-neutral-200 p-4">
@@ -74,17 +76,21 @@
           <div class="text-sm text-neutral-600 space-y-2">
             <div class="flex justify-between">
               <span>Subtotal</span>
-              <span>{{ formatPrice(order.sub_total) }}</span>
+              <span>{{ NumberFunctions.formatCurrency(order.sub_total) }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Shipping Fee</span>
+              <span>{{ NumberFunctions.formatCurrency(order.shipping_charge) }}</span>
             </div>
             <div class="flex justify-between">
               <span>Tax (GST)</span>
-              <span>{{ formatPrice(order.tax_total) }}</span>
+              <span>{{ NumberFunctions.formatCurrency(order.tax_total) }}</span>
             </div>
             <div
               class="flex justify-between border-t border-neutral-200 pt-2 font-bold text-neutral-950"
             >
               <span>Total</span>
-              <span>{{ formatPrice(order.total) }}</span>
+              <span>{{ NumberFunctions.formatCurrency(order.balance) }}</span>
             </div>
           </div>
         </div>
@@ -116,7 +122,7 @@
               </p>
             </div>
             <p class="shrink-0 font-semibold text-neutral-900">
-              {{ formatPrice(line.item_total) }}
+              {{ NumberFunctions.formatCurrency(line.item_total) }}
             </p>
           </div>
         </div>
@@ -142,15 +148,6 @@ const orderId = route.params.orderId as string
 const orderStore = useOrderStore()
 const { order } = storeToRefs(orderStore)
 
-function formatDate(value: string) {
-  if (!value) return ''
-  return new Intl.DateTimeFormat('en-AU', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  }).format(new Date(value))
-}
-
 function statusClass(status: string) {
   const lower = status?.toLowerCase()
   if (lower === 'confirmed') return 'bg-blue-100 text-blue-800'
@@ -158,10 +155,6 @@ function statusClass(status: string) {
   if (lower === 'void') return 'bg-red-100 text-red-800'
   if (lower === 'draft') return 'bg-yellow-100 text-yellow-800'
   return 'bg-neutral-100 text-neutral-800'
-}
-
-function formatPrice(value: number) {
-  return new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD' }).format(value ?? 0)
 }
 
 useSeoMeta({ title: computed(() => `Order ${order.value?.salesorder_number ?? ''}`) })

@@ -1,15 +1,26 @@
 <template>
-  <UButton
-    v-if="user?.accountType === AccountType.ADMIN"
-    v-bind="$attrs"
-    :label="hasProductSpecs ? 'Update Product specs' : 'Add Product Specs'"
-    icon="i-lucide-file-up"
-    color="primary"
-    variant="solid"
-    size="lg"
-    class="justify-center"
-    @click="open()"
-  />
+  <div class="flex gap-x-2 relative items-center" v-if="user?.accountType === AccountType.ADMIN">
+    <UButton
+      v-bind="$attrs"
+      :label="hasProductSpecs ? 'Update Product specs' : 'Add Product Specs'"
+      icon="i-lucide-file-up"
+      size="lg"
+      class="justify-center"
+      @click="open()"
+    />
+    <UTooltip mode="hover" :open-delay="500" :close-delay="300" v-if="hasProductSpecs">
+      <UIcon
+        name="i-lucide-trash"
+        color="error"
+        class="text-error cursor-pointer"
+        size="16px"
+        @click="deleteProductSpecs()"
+      />
+      <template #content>
+        <p class="inline-flex">Delete Product Specs</p>
+      </template>
+    </UTooltip>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -43,4 +54,9 @@ onChange(async (selectedFiles) => {
   emit('updated')
   reset()
 })
+
+const deleteProductSpecs = async () => {
+  await adminStore.deleteProductSpecs(props.product.item_id)
+  emit('updated')
+}
 </script>

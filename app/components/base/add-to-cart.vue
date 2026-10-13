@@ -22,6 +22,7 @@ import { useProductStore } from '~/store/product-store'
 import type { ProductEntity, ProductDataEntity } from '~/types/product'
 
 const props = defineProps<{
+  imageUrl: string
   product?: ProductEntity
 }>()
 
@@ -44,7 +45,7 @@ function addToCart() {
     navigateTo({ name: RouteName.Auth.Login })
     return
   }
-  cartStore.addToCart(product.value, 1)
+  cartStore.addToCart(product.value, 1, props.imageUrl)
 }
 </script>
 

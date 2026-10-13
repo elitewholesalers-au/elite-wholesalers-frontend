@@ -8,11 +8,18 @@ export const AdminService = {
   async uploadSpecs(productId: string, data: FormData) {
     return await ApiService.run({
       method: ApiService.POST,
-      url: `/admin/products/${productId}/upload-specs`,
+      url: `/admin/products/${productId}/product-specs`,
       data,
       headers: {
         'Content-Type': 'multipart/form-data'
       }
+    })
+  },
+
+  async deleteSpecs(productId: string) {
+    return await ApiService.run({
+      method: ApiService.DELETE,
+      url: `/admin/products/${productId}/product-specs`
     })
   },
 

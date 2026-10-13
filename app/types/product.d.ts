@@ -115,14 +115,24 @@ export interface ProductDataEntity {
   package_details: ProductPackageDetails
   is_modifier_item: boolean
   integration_references: unknown[]
+
   custom_field_hash?: {
     cf_product_specs?: string
     cf_product_specs_formatted?: string
     cf_product_specs_unformatted?: string
+
+    cf_show_product_specs?: string
+    cf_show_product_specs_formatted?: boolean
+    cf_show_product_specs_unformatted?: string
   }
   cf_product_specs?: string
   cf_product_specs_formatted?: string
   cf_product_specs_unformatted?: string
+
+  cf_show_product_specs?: string
+  cf_show_product_specs_formatted?: boolean
+  cf_show_product_specs_unformatted?: string
+
   has_variant: boolean
   price: {
     amount: number
@@ -170,7 +180,7 @@ export interface ProductCustomField {
   search_entity: string
   data_type: string
   placeholder: string
-  value: string
+  value: string | boolean
   is_dependent_field: boolean
   is_rich_text_supported?: boolean
 }
@@ -304,10 +314,19 @@ export interface ProductEntity {
     cf_product_specs?: string
     cf_product_specs_formatted?: string
     cf_product_specs_unformatted?: string
+
+    cf_show_product_specs?: string
+    cf_show_product_specs_formatted?: string
+    cf_show_product_specs_unformatted?: boolean
   }
   cf_product_specs?: string
   cf_product_specs_formatted?: string
   cf_product_specs_unformatted?: string
+
+  cf_show_product_specs?: string
+  cf_show_product_specs_formatted?: string
+  cf_show_product_specs_unformatted?: boolean
+
   price: {
     amount: number
     currency: Currency
@@ -374,6 +393,7 @@ export interface CategoryEntity {
 export interface CartEntity {
   cartId: string
   itemId: string
+  imageUrl?: string
   product: ProductEntity | ProductDataEntity
   quantity: number
   total: number

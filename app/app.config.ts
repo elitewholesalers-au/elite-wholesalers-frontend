@@ -20,6 +20,12 @@ export default defineAppConfig({
         // color: 'neutral'
       }
     },
+
+    table: {
+      slots: {
+        tr: 'even:bg-zinc-100'
+      }
+    },
     badge: {
       base: 'cursor-pointer',
       compoundVariants: [
@@ -142,13 +148,6 @@ export default defineAppConfig({
         }
       },
       defaultVariants: { size: 'lg' }
-    },
-
-    radioGroup: {
-      slots: {
-        item: 'my-1',
-        label: 'block font-normal text-base'
-      }
     }
   }
 })

@@ -10,6 +10,11 @@ export enum AccountType {
   ADMIN = 'ADMIN'
 }
 
+export enum DeliveryMethod {
+  PICKUP = 'PICKUP',
+  SHIPPING = 'SHIPPING'
+}
+
 export enum ProductCategory {
   ELECTRONICS = 'Electronics',
   FASHION = 'Fashion',

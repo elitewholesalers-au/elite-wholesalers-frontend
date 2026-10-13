@@ -38,7 +38,11 @@ export const useCartStore = defineStore('CartStore', {
       }
     },
 
-    async addToCart(product: ProductEntity | ProductDataEntity, quantity: number = 1) {
+    async addToCart(
+      product: ProductEntity | ProductDataEntity,
+      quantity: number = 1,
+      imageUrl: string
+    ) {
       const toast = useToast()
       const { isLoggedIn } = storeToRefs(useAuthStore())
       const normalizedQuantity = Math.floor(quantity)
@@ -58,6 +62,7 @@ export const useCartStore = defineStore('CartStore', {
       const tempCartId = crypto.randomUUID()
       const newItem: CartEntity = {
         product,
+        imageUrl,
         quantity: normalizedQuantity,
         itemId: product.item_id,
         total: payloadPrice.amount * normalizedQuantity,
@@ -72,7 +77,8 @@ export const useCartStore = defineStore('CartStore', {
         {
           item_id: product.item_id,
           quantity: normalizedQuantity,
-          price: payloadPrice
+          price: payloadPrice,
+          image_url: imageUrl
         },
         tempCartId
       )
@@ -83,6 +89,7 @@ export const useCartStore = defineStore('CartStore', {
         item_id: string
         quantity: number
         price: { amount: number; currency: `${Currency}` }
+        image_url: string
       },
       tempCartId: string
     ) {
@@ -142,19 +149,6 @@ export const useCartStore = defineStore('CartStore', {
       CartService.deleteCart().catch((error) =>
         console.error('Background clear sync failed:', error)
       )
-    },
-
-    async checkout() {
-      try {
-        const res = await CartService.initializeCheckout()
-        if (res.success && res.data.payment_url) {
-          this.cartItems = []
-          return res.data.payment_url
-        }
-      } catch (error) {
-        console.error('Checkout initialization failed:', error)
-        throw error
-      }
     }
   },
   persist: true

@@ -46,7 +46,17 @@
         >
         <span v-else class="font-semibold">View Pricing</span>
       </BaseAuthButton>
-      <BaseAddToCart class="rounded!" v-if="isLoggedIn" :product="product" />
+      <BaseAddToCart
+        class="rounded!"
+        v-if="isLoggedIn"
+        :product="product"
+        :imageUrl="
+          ZohoHelpers.getZohoProductImageUrl({
+            imageName: product?.image_name,
+            imageDocumentId: product?.image_document_id
+          })
+        "
+      />
     </div>
   </div>
 </template>
