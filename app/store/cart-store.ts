@@ -62,7 +62,7 @@ export const useCartStore = defineStore('CartStore', {
       const tempCartId = crypto.randomUUID()
       const newItem: CartEntity = {
         product,
-        imageUrl,
+        image_url: imageUrl,
         quantity: normalizedQuantity,
         itemId: product.item_id,
         total: payloadPrice.amount * normalizedQuantity,

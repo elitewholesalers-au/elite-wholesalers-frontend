@@ -175,9 +175,15 @@
               :key="item.cartId"
               class="flex justify-between gap-4 py-3"
             >
-              <span class="text-sm text-neutral-700"
-                >{{ item.product?.name }} × {{ item.quantity }}</span
-              >
+              <div class="space-y-0.5 max-w-8/10">
+                <p class="text-sm text-neutral-700">
+                  {{ item.product?.name }}
+                  <span class="font-mono text-xxs">
+                    &nbsp; x {{ item.quantity }} {{ item.quantity > 1 ? 'units' : 'unit' }}</span
+                  >
+                </p>
+                <UBadge variant="soft" class="block w-fit"> SKU : {{ item?.product?.sku }} </UBadge>
+              </div>
               <span class="shrink-0 text-sm text-neutral-700">
                 {{ NumberFunctions.formatCurrency(item.total, item.price.currency) }}
               </span>

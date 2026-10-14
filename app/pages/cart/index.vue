@@ -34,8 +34,8 @@
             class="size-24 shrink-0 overflow-hidden bg-surface-container-low sm:size-32"
           >
             <NuxtImg
-              v-if="item?.imageUrl"
-              :src="item?.imageUrl"
+              v-if="item?.image_url"
+              :src="item?.image_url"
               :alt="item?.product?.name"
               class="size-full object-cover"
             />

@@ -393,7 +393,7 @@ export interface CategoryEntity {
 export interface CartEntity {
   cartId: string
   itemId: string
-  imageUrl?: string
+  image_url?: string
   product: ProductEntity | ProductDataEntity
   quantity: number
   total: number
