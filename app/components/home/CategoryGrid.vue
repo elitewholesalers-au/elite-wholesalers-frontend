@@ -30,11 +30,10 @@
           <!-- Card Media Header -->
           <template #header>
             <div class="relative w-full overflow-hidden bg-gray-800">
-              <NuxtImg
-                :src="category?.image"
+              <img
+                :src="category.image"
                 :alt="category.name"
                 class="w-full md:h-80 object-fill bg-left overflow-hidden object-top block transition-transform duration-300 hover:scale-102"
-                loading="lazy"
               />
             </div>
           </template>
@@ -56,5 +55,55 @@
 import { useProductStore } from '~/store/product-store'
 
 const productStore = useProductStore()
-const { categories } = storeToRefs(productStore)
+
+const categories = ref([
+  {
+    name: 'CCTV',
+    image: '/product-images/cctv.jpeg',
+    category_id: '1969240000009043009',
+    description: 'High-definition IP, analog, and PTZ surveillance cameras.'
+  },
+  {
+    name: 'Alarms',
+    image: '/product-images/alarms.jpeg',
+    category_id: '1969240000009043011',
+    description: 'Intrusion sensors, sirens, and multi-zone control panels.'
+  },
+  {
+    name: 'Intercoms',
+    image: '/product-images/intercoms.jpeg',
+    category_id: '1969240000009043025',
+    description: 'Two-way video doorbells and commercial IP stations.'
+  },
+  {
+    name: 'Access Control',
+    image: '/product-images/access-control.jpeg',
+    category_id: '1969240000022731037',
+    description: 'Biometric terminals, RFID card readers, and smart locks.'
+  },
+  {
+    name: 'Network Devices',
+    image: '/product-images/network-transmission.jpeg',
+    category_id: '1969240000009043027',
+    description: 'PoE switches, patch panels, routers, and fiber transceivers.'
+  },
+  {
+    name: 'Automotive',
+    image: '/product-images/automotives.jpeg',
+    category_id: '1969240000024405845',
+    description: 'GPS fleet tracking units and dual dash cameras.'
+  },
+  {
+    name: 'Gun Locks',
+    image: '/product-images/gun-locks.jpeg',
+    category_id: '1969240000025170003',
+    description: 'Trigger guards, biometric cable locks, and secure vaults.'
+  },
+  {
+    name: 'Electrical & LED lighting',
+    image: '/product-images/lighting-automation.jpeg',
+    category_id: '1969240000009922011',
+    description: 'Zigbee gateways, smart relays, and wireless environmental sensors.'
+  }
+])
 </script>

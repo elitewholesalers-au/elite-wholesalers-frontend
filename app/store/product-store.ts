@@ -14,7 +14,7 @@ interface ProductStore {
   featuredProducts: ProductEntity[]
   searchedProducts: ProductEntity[]
   categoryProducts: ProductEntity[]
-  selectedProduct: ProductDataEntity | null
+  selectedProduct: ProductDataEntity | ProductEntity | null
 
   selectedCategory: CategoryEntity | null
   parentCategory: CategoryEntity | null
@@ -87,6 +87,11 @@ export const useProductStore = defineStore('ProductStore', {
         return this.selectedProduct
       } else {
         this.loadingStates.product = true
+        const product = this.categoryProducts.find(({ item_id }) => productId === item_id)
+        if (product) {
+          console.log(product)
+          this.selectedProduct = { ...product, is_category_product: true }
+        }
         const res = await ProductService.getProduct(productId)
         if (res.success) {
           this.selectedProduct = res.data

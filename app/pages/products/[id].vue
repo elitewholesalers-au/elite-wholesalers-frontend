@@ -14,7 +14,22 @@
     </nav>
 
     <div class="grid gap-10 lg:grid-cols-2 lg:gap-16">
-      <BaseProductGallery :images="getProductImages(product)" :alt="product.name" />
+      <div class="flex flex-col my-10 gap-20" v-if="product.is_category_product === true">
+        <div class="overflow-hidden mx-auto">
+          <NuxtImg
+            :src="
+              ZohoHelpers.getZohoProductImageUrl({
+                imageName: product?.image_name,
+                imageDocumentId: product?.image_document_id
+              })
+            "
+            :alt="product?.name"
+            class="aspect-auto h-60 max-h-100 object-cover"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+      <BaseProductGallery v-else :images="getProductImages(product)" :alt="product.name" />
       <section class="lg:py-4">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-primary-500">
           {{ product?.brand ?? product.category_name }}
