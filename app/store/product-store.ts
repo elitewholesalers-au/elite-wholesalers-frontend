@@ -20,6 +20,7 @@ interface ProductStore {
   parentCategory: CategoryEntity | null
   subCategories: CategoryEntity[]
 
+  categoryProductQuery: { sort_order: string; sort_column: string }
   loadingStates: {
     product: boolean
     categories: boolean
@@ -39,7 +40,7 @@ export const useProductStore = defineStore('ProductStore', {
     selectedCategory: null,
     parentCategory: null,
     subCategories: [],
-
+    categoryProductQuery: { sort_column: 'purchase_rate', sort_order: 'D' },
     loadingStates: {
       product: false,
       categories: false,
@@ -72,11 +73,11 @@ export const useProductStore = defineStore('ProductStore', {
       }
     },
 
-    async getProductByCategoryId(
-      categoryId: string,
-      query?: { sort_order: string; sort_column: string }
-    ) {
-      const res = await ProductService.getProductsByCategoryId(categoryId, query)
+    async getProductByCategoryId(categoryId: string) {
+      const res = await ProductService.getProductsByCategoryId(
+        categoryId,
+        this.categoryProductQuery
+      )
       if (res.success) {
         this.categoryProducts = res.data
       }

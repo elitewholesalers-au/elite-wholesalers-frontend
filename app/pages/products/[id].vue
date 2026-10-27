@@ -14,7 +14,7 @@
     </nav>
 
     <div class="grid gap-10 lg:grid-cols-2 lg:gap-16">
-      <div class="flex flex-col my-10 gap-20" v-if="product.is_category_product === true">
+      <div class="flex flex-col my-10 gap-20" v-if="product?.is_category_product === true">
         <div class="overflow-hidden mx-auto">
           <NuxtImg
             :src="
@@ -161,6 +161,6 @@ function downloadProductSpecs() {
 }
 
 onBeforeMount(() => {
-  productStore.selectProduct(route.params.id as string)
+  productStore.selectProduct(route.params.id as string, { force: true })
 })
 </script>

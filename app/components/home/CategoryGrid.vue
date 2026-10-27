@@ -30,9 +30,12 @@
           <!-- Card Media Header -->
           <template #header>
             <div class="relative w-full overflow-hidden bg-gray-800">
-              <img
+              <NuxtImg
                 :src="category.image"
                 :alt="category.name"
+                format="webp"
+                :preload="{ fetchPriority: 'high' }"
+                loading="eager"
                 class="w-full md:h-80 object-fill bg-left overflow-hidden object-top block transition-transform duration-300 hover:scale-102"
               />
             </div>

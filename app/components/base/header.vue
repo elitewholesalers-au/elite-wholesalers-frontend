@@ -139,7 +139,7 @@ const authStore = useAuthStore()
 const productStore = useProductStore()
 const cartStore = useCartStore()
 
-const { isLoggedIn } = storeToRefs(authStore)
+const { isLoggedIn, user } = storeToRefs(authStore)
 const { categories, searchedProducts } = storeToRefs(productStore)
 const { cartItems, itemCount } = storeToRefs(cartStore)
 
@@ -193,26 +193,43 @@ const items = computed<NavigationMenuItem[]>(() => [
   }
 ])
 
-const dashboardNavigation = ref<
-  {
-    label: string
-    to?: string
-    icon: string
-    class?: string
-    color?: string
-    onSelect?: () => any
-  }[]
->([
+interface NavigationItem {
+  label: string
+  to?: string
+  icon: string
+  class?: string
+  color?: 'error'
+  onSelect?: () => any
+}
+;[]
+const navigation = ref<NavigationItem[]>([
   { label: 'Dashboard', to: '/dashboard', icon: 'i-lucide-layout-dashboard' },
   { label: 'Profile', to: '/dashboard/profile', icon: 'i-lucide-user-round' },
   { label: 'My orders', to: '/dashboard/orders', icon: 'i-lucide-package-check' },
-  { label: 'Addresses', to: '/dashboard/addresses', icon: 'i-lucide-map-pin' },
+  { label: 'Addresses', to: '/dashboard/addresses', icon: 'i-lucide-map-pin' }
+])
+
+const adminRoutes = ref([
+  { label: 'Manage Products', to: '/dashboard/manage-products', icon: 'i-lucide-package' },
+  { label: 'Manage Users', to: '/dashboard/manage-users', icon: 'i-lucide-user' },
   {
+    label: 'Download Center',
+    to: '/dashboard/download-center',
+    icon: 'i-lucide-download'
+  }
+])
+
+const dashboardNavigation = computed(() => {
+  const logoutRoute: NavigationItem = {
     label: 'Logout',
     icon: 'i-lucide-log-out',
     class: 'text-error',
     color: 'error',
     onSelect: () => authStore.logout()
   }
-])
+
+  if (user.value?.accountType === AccountType.ADMIN) {
+    return [...navigation.value, ...adminRoutes.value, logoutRoute]
+  } else return [...navigation.value, logoutRoute]
+})
 </script>

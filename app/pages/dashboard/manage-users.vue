@@ -26,6 +26,7 @@
       <UTable
         :data="users"
         :columns="columns"
+        v-model:sorting="sorting"
         v-model:global-filter="searchQuery"
         :ui="{
           td: 'py-2 px-3 text-xs',
@@ -191,6 +192,9 @@ import { useAdminStore } from '~/store/admin-store'
 import { AccountType } from '~/types/enums'
 import { useAuthStore } from '~/store/auth-store'
 
+const UButton = resolveComponent('UButton')
+const UDropdownMenu = resolveComponent('UDropdownMenu')
+
 definePageMeta({
   layout: 'dashboard',
   middleware: ['auth', 'admin']
@@ -209,11 +213,26 @@ const deleteModalOpen = ref(false)
 const userToDelete = ref<any>(null)
 const searchQuery = ref('')
 
+const sorting = ref([
+  {
+    id: 'created_at',
+    desc: true
+  },
+  {
+    id: 'accountType',
+    desc: false
+  }
+])
+
 // Table Columns configuration including business name
 const columns = [
-  { accessorKey: 'created_at', header: 'Created At' },
+  {
+    accessorKey: 'created_at',
+    header: ({ column }) => getHeader(column, 'Created At'),
+    enableSorting: true
+  },
   { accessorKey: 'fullname', header: 'Full Name' },
-  { accessorKey: 'accountType', header: 'Account Type' },
+  { accessorKey: 'accountType', header: ({ column }) => getHeader(column, 'Account Type') },
   { accessorKey: 'username', header: 'Username' },
   { accessorKey: 'email', header: 'Email' },
   { accessorKey: 'business_name', header: 'Business Name' },
@@ -245,4 +264,61 @@ const confirmDelete = async () => {
 onMounted(() => {
   adminStore.getAdminUsers()
 })
+
+function getHeader(column: any, label: string) {
+  const isSorted = column.getIsSorted()
+
+  return h(
+    UDropdownMenu,
+    {
+      content: {
+        align: 'start'
+      },
+      'aria-label': 'Actions dropdown',
+      items: [
+        {
+          label: 'Asc',
+          type: 'checkbox',
+          icon: 'i-lucide-arrow-up-narrow-wide',
+          checked: isSorted === 'asc',
+          onSelect: () => {
+            if (isSorted === 'asc') {
+              column.clearSorting()
+            } else {
+              column.toggleSorting(false)
+            }
+          }
+        },
+        {
+          label: 'Desc',
+          icon: 'i-lucide-arrow-down-wide-narrow',
+          type: 'checkbox',
+          checked: isSorted === 'desc',
+          onSelect: () => {
+            if (isSorted === 'desc') {
+              column.clearSorting()
+            } else {
+              column.toggleSorting(true)
+            }
+          }
+        }
+      ]
+    },
+    () =>
+      h(UButton, {
+        color: 'neutral',
+        variant: 'ghost',
+        label,
+        size: 'sm',
+        style: { hover: {} },
+        icon: isSorted
+          ? isSorted === 'asc'
+            ? 'i-lucide-arrow-up-narrow-wide'
+            : 'i-lucide-arrow-down-wide-narrow'
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5 data-[state=open]:bg-elevated hover:bg-transparent!',
+        'aria-label': `Sort by ${isSorted === 'asc' ? 'descending' : 'ascending'}`
+      })
+  )
+}
 </script>

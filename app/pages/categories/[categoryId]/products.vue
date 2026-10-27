@@ -25,10 +25,9 @@
             size="sm"
             arrow
             :items="filterQuery"
-            v-model="selectedQuery"
-            @update:model-value="
-              (val) => productStore.getProductByCategoryId(categoryId, val.value)
-            "
+            value-key="value"
+            v-model="categoryProductQuery"
+            @update:model-value="(val) => productStore.getProductByCategoryId(categoryId)"
             class="w-36"
             :ui="{
               base: 'text-xs!',
@@ -45,42 +44,6 @@
         </div>
       </div>
     </div>
-    <!-- <div
-      class="sticky top-0 z-10 overflow-scroll w-full -mx-5 mt-5 border-b border-neutral-200 bg-white/95 px-5 py-3 backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:px-0 sm:py-5"
-    >
-      <nav
-        v-if="subCategories.length > 0"
-        class="flex gap-2 overflow-x-auto pb-1"
-        aria-label="Filter products by category"
-      >
-        <UButton
-          v-for="category in subCategories"
-          :key="category.category_id"
-          type="button"
-          class="px-4 py-2 whitespace-nowrap shrink-0"
-          :variant="category.category_id === categoryId ? 'solid' : 'outline'"
-          :aria-pressed="category.category_id === categoryId"
-          @click="productStore.selectCategory(category.category_id)"
-        >
-          {{ category.name }}
-        </UButton>
-        <UButton
-          type="button"
-          class="px-4 py-2 whitespace-nowrap shrink-0"
-          :variant="parentCategory?.category_id === categoryId ? 'solid' : 'outline'"
-          :aria-pressed="parentCategory?.category_id === categoryId"
-          @click="
-            () => {
-              if (selectedCategory !== null && parentCategory !== null) {
-                productStore.selectCategory(parentCategory?.category_id)
-              }
-            }
-          "
-        >
-          others
-        </UButton>
-      </nav>
-    </div> -->
 
     <div class="w-full" v-if="categoryProducts.length > 0">
       <div class="product-list gap-4">
@@ -109,7 +72,7 @@ definePageMeta({
 
 const route = useRoute()
 const productStore = useProductStore()
-const { selectedCategory, categoryProducts } = storeToRefs(productStore)
+const { selectedCategory, categoryProducts, categoryProductQuery } = storeToRefs(productStore)
 
 const categoryId = computed(() => route.params.categoryId as string)
 
