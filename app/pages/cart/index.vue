@@ -140,7 +140,6 @@ const { cartItems, subtotal, itemCount } = storeToRefs(cartStore)
 
 function productImage(prod: ProductEntity | ProductDataEntity | null): string {
   if (!prod) return ''
-  console.log({ prod })
   const imageDocumentId =
     'image_document_id' in prod
       ? prod.image_document_id

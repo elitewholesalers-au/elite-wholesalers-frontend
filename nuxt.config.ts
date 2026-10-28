@@ -55,6 +55,7 @@ export default defineNuxtConfig({
           'https://cdn1.zohoecommerce.com',
           'http://api.elitewholesalers.com.au',
           'https://www.youtube.com',
+          'https://i.ytimg.com',
           'https://www.googletagmanager.com'
         ],
         'frame-src': [
@@ -94,6 +95,7 @@ export default defineNuxtConfig({
         'picture-in-picture': [
           "'self'",
           'https://www.youtube.com',
+          'https://i.ytimg.com',
           'https://www.youtube-nocookie.com'
         ],
         fullscreen: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com']
@@ -121,11 +123,8 @@ export default defineNuxtConfig({
       }
     ]
   },
-  seo: {},
 
-  // gtag: {
-  //   id: process.env.NUXT_PUBLIC_GTAG_ID || 'G-XXXXXXXXXX'
-  // },
+  gtag: { id: 'GTM-MXTZPBRR' },
 
   compatibilityDate: '2026-06-30',
 
