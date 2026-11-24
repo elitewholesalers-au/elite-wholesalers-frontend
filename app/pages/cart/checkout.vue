@@ -275,7 +275,10 @@ const pickupAddress = ref({
 })
 
 const checkoutCart = async () => {
-  if (!hasCompleteAddress.value) {
+  if (
+    selectedDeliveryMethod.value === DeliveryMethod.SHIPPING &&
+    !hasCompleteAddress.value
+  ) {
     toast.add({ title: 'Please add a delivery address before checking out.', color: 'error' })
     return
   }
