@@ -17,7 +17,7 @@ export const CartService = {
     })
   },
 
-  async initializeCheckout(data: { delivery_method: DeliveryMethod }) {
+  async initializeCheckout(data: { delivery_method: DeliveryMethod; promo_code?: string }) {
     return await ApiService.run({
       method: ApiService.POST,
       url: '/cart/checkout',
