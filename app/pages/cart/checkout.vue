@@ -131,6 +131,27 @@
             </div>
           </template>
 
+<!-- Promotional Code -->
+<div class="rounded-xl border border-neutral-200 p-5 space-y-3">
+  <label
+    for="promo-code"
+    class="block text-sm font-semibold text-neutral-900"
+  >
+    Promotional Code
+  </label>
+
+  <UInput
+    id="promo-code"
+    v-model="promoCode"
+    placeholder="Enter promotional code"
+    size="lg"
+    class="w-full"
+  />
+
+  <p class="text-xs text-neutral-500">
+    Enter WEEKLY20 to receive 20% off eligible Elite Alarms products.
+  </p>
+</div>
           <!-- Disabled Checkout Action when address is missing -->
           <div class="flex flex-col-reverse md:flex-row gap-4">
             <UButton variant="outline" class="w-full text-center px-10 justify-center">
@@ -221,7 +242,7 @@ const { user } = storeToRefs(useAuthStore())
 const { cartItems, subtotal } = storeToRefs(cartStore)
 const toast = useToast()
 const isLoading = ref(false)
-
+const promoCode = ref('')
 const deliveryMethods = ref([DeliveryMethod.PICKUP, DeliveryMethod.SHIPPING])
 const selectedDeliveryMethod = ref<DeliveryMethod>()
 // Computed check to verify if the user has a complete saved delivery address
@@ -264,7 +285,8 @@ const checkoutCart = async () => {
   try {
     if (selectedDeliveryMethod.value) {
       const response = await CartService.initializeCheckout({
-        delivery_method: selectedDeliveryMethod.value
+       delivery_method: selectedDeliveryMethod.value,
+        promo_code: promoCode.value.trim()
       })
       if (response?.data.payment_url) {
         window.location.href = response.data?.payment_url
