@@ -242,13 +242,31 @@
   v-if="checkoutPreview"
   class="mt-4 flex justify-between border-t border-neutral-200 pt-4 font-bold text-neutral-950"
 >
-  <span>Discounted subtotal</span>
+  <span>Discounted product subtotal (ex GST)</span>
   <span>{{ NumberFunctions.formatCurrency(checkoutPreview.discounted_subtotal, Currency.AUD) }}</span>
 </div>
 
-          <p class="mt-3 text-xs leading-5 text-neutral-500">
-            Shipping and taxes can be confirmed when your order is reviewed.
-          </p>
+<div v-if="checkoutPreview" class="mt-3 flex justify-between text-sm text-neutral-700">
+  <span>Subtotal including shipping (ex GST)</span>
+  <span>{{ NumberFunctions.formatCurrency(checkoutPreview.subtotal_ex_gst, Currency.AUD) }}</span>
+</div>
+
+<div v-if="checkoutPreview" class="mt-3 flex justify-between text-sm text-neutral-700">
+  <span>GST (10%)</span>
+  <span>{{ NumberFunctions.formatCurrency(checkoutPreview.gst_amount, Currency.AUD) }}</span>
+</div>
+
+<div
+  v-if="checkoutPreview"
+  class="mt-4 flex justify-between border-t border-neutral-200 pt-4 text-lg font-bold text-neutral-950"
+>
+  <span>Total payable (inc GST)</span>
+  <span>{{ NumberFunctions.formatCurrency(checkoutPreview.total_inc_gst, Currency.AUD) }}</span>
+</div>
+
+<p v-if="checkoutPreview" class="mt-3 text-xs leading-5 text-neutral-500">
+  Prices and shipping are GST-exclusive. Final order taxes will be confirmed by Zoho at checkout.
+</p>
         </div>
       </div>
     </template>
