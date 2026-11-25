@@ -190,6 +190,12 @@
           class="border-t border-neutral-200 pt-6 lg:sticky lg:top-8 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0"
         >
           <h2 class="font-oswald text-2xl text-neutral-950">Order summary</h2>
+          <p v-if="isPreviewLoading" class="mt-3 text-sm text-neutral-500">
+  Calculating your promotional discount and shipping...
+</p>
+<p v-if="previewError" class="mt-3 text-sm text-red-600">
+  {{ previewError }}
+</p>
           <ul class="mt-5 divide-y divide-neutral-200">
             <li
               v-for="item in cartItems"
@@ -214,8 +220,15 @@
             class="mt-4 flex justify-between border-t border-neutral-200 pt-4 font-bold text-neutral-950"
           >
             <span>Subtotal</span>
-            <span>{{ NumberFunctions.formatCurrency(subtotal, Currency.AUD) }}</span>
+       <span>{{ NumberFunctions.formatCurrency(checkoutPreview?.original_subtotal ?? subtotal, Currency.AUD) }}</span>
           </div>
+          <div
+  v-if="checkoutPreview && checkoutPreview.discount_amount > 0"
+  class="mt-3 flex justify-between text-sm text-green-700"
+>
+  <span>WEEKLY20 Promotional Discount (20%)</span>
+  <span>-{{ NumberFunctions.formatCurrency(checkoutPreview.discount_amount, Currency.AUD) }}</span>
+</div>
           <p class="mt-3 text-xs leading-5 text-neutral-500">
             Shipping and taxes can be confirmed when your order is reviewed.
           </p>
