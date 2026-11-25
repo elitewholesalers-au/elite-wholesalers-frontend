@@ -330,7 +330,17 @@ const updateCheckoutPreview = async () => {
     isPreviewLoading.value = false
   }
 }
-const checkoutCart = async () => {
+
+watch(
+  [selectedDeliveryMethod, promoCode, cartItems],
+  () => {
+    updateCheckoutPreview()
+  },
+  { deep: true, immediate: true }
+)
+
+  
+  const checkoutCart = async () => {
   if (
     selectedDeliveryMethod.value === DeliveryMethod.SHIPPING &&
     !hasCompleteAddress.value
