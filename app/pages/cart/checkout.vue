@@ -242,7 +242,7 @@
   v-if="checkoutPreview"
   class="mt-4 flex justify-between border-t border-neutral-200 pt-4 font-bold text-neutral-950"
 >
-  <span>Discounted product subtotal (ex GST)</span>
+  <span>Subtotal (ex GST)</span>
   <span>{{ NumberFunctions.formatCurrency(checkoutPreview.discounted_subtotal, Currency.AUD) }}</span>
 </div>
 
