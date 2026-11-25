@@ -323,6 +323,10 @@ const updateCheckoutPreview = async () => {
       promo_code: promoCode.value.trim()
     })
 
+if (!response.success || !response.data) {
+  throw new Error(response.message || 'Checkout preview failed')
+}
+
     checkoutPreview.value = response.data
   } catch (error) {
     previewError.value = 'Unable to calculate checkout pricing. Please try again.'
