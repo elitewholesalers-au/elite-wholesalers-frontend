@@ -229,6 +229,23 @@
   <span>WEEKLY20 Promotional Discount (20%)</span>
   <span>-{{ NumberFunctions.formatCurrency(checkoutPreview.discount_amount, Currency.AUD) }}</span>
 </div>
+          
+<div
+  v-if="checkoutPreview"
+  class="mt-3 flex justify-between text-sm text-neutral-700"
+>
+  <span>Shipping</span>
+  <span>{{ NumberFunctions.formatCurrency(checkoutPreview.shipping_charge, Currency.AUD) }}</span>
+</div>
+
+<div
+  v-if="checkoutPreview"
+  class="mt-4 flex justify-between border-t border-neutral-200 pt-4 font-bold text-neutral-950"
+>
+  <span>Discounted subtotal</span>
+  <span>{{ NumberFunctions.formatCurrency(checkoutPreview.discounted_subtotal, Currency.AUD) }}</span>
+</div>
+
           <p class="mt-3 text-xs leading-5 text-neutral-500">
             Shipping and taxes can be confirmed when your order is reviewed.
           </p>
