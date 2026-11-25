@@ -306,8 +306,13 @@ const pickupAddress = ref({
   longitude: 133,
   postal_code: '2210'
 })
-const updateCheckoutPreview = async () => {
-  if (!selectedDeliveryMethod.value || cartItems.value.length === 0) {
+let latestPreviewRequestId = 0
+ 
+  const updateCheckoutPreview = async () => {
+  
+  const requestId = ++latestPreviewRequestId
+
+    if (!selectedDeliveryMethod.value || cartItems.value.length === 0) {
     checkoutPreview.value = null
     previewError.value = ''
     return
@@ -327,10 +332,16 @@ if (!response.success || !response.data) {
   throw new Error(response.message || 'Checkout preview failed')
 }
 
+if (requestId !== latestPreviewRequestId) return
     checkoutPreview.value = response.data
   } catch (error) {
+   
+if (requestId !== latestPreviewRequestId) return
+
     previewError.value = 'Unable to calculate checkout pricing. Please try again.'
   } finally {
+ 
+if (requestId === latestPreviewRequestId) {
     isPreviewLoading.value = false
   }
 }
