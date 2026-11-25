@@ -243,6 +243,9 @@ const { cartItems, subtotal } = storeToRefs(cartStore)
 const toast = useToast()
 const isLoading = ref(false)
 const promoCode = ref('')
+const checkoutPreview = ref<any>(null)
+const isPreviewLoading = ref(false)
+const previewError = ref('') 
 const deliveryMethods = ref([DeliveryMethod.PICKUP, DeliveryMethod.SHIPPING])
 const selectedDeliveryMethod = ref<DeliveryMethod>()
 // Computed check to verify if the user has a complete saved delivery address
@@ -273,7 +276,30 @@ const pickupAddress = ref({
   longitude: 133,
   postal_code: '2210'
 })
+const updateCheckoutPreview = async () => {
+  if (!selectedDeliveryMethod.value || cartItems.value.length === 0) {
+    checkoutPreview.value = null
+    previewError.value = ''
+    return
+  }
 
+  isPreviewLoading.value = true
+  previewError.value = ''
+  checkoutPreview.value = null
+
+  try {
+    const response = await CartService.previewCheckout({
+      delivery_method: selectedDeliveryMethod.value,
+      promo_code: promoCode.value.trim()
+    })
+
+    checkoutPreview.value = response.data
+  } catch (error) {
+    previewError.value = 'Unable to calculate checkout pricing. Please try again.'
+  } finally {
+    isPreviewLoading.value = false
+  }
+}
 const checkoutCart = async () => {
   if (
     selectedDeliveryMethod.value === DeliveryMethod.SHIPPING &&
