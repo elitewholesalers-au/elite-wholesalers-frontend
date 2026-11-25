@@ -24,8 +24,16 @@ export const CartService = {
       data
     })
   },
+  async previewCheckout(data: { delivery_method: DeliveryMethod; promo_code?: string }) {
+    return await ApiService.run({
+      method: ApiService.POST,
+      url: '/cart/checkout/preview',
+      data
+    })
+  },
 
   async updateUserCart(cartId: string, data: { quantity: number }) {
+  
     return await ApiService.run({
       method: ApiService.PATCH,
       url: `/cart/${cartId}`,
