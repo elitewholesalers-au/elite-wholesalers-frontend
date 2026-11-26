@@ -219,7 +219,7 @@
           <div
             class="mt-4 flex justify-between border-t border-neutral-200 pt-4 font-bold text-neutral-950"
           >
-            <span>Subtotal</span>
+            <span>Item Subtotal (ex GST)</span>
        <span>{{ NumberFunctions.formatCurrency(checkoutPreview?.original_subtotal ?? subtotal, Currency.AUD) }}</span>
           </div>
           <div
@@ -234,7 +234,7 @@
   v-if="checkoutPreview"
   class="mt-3 flex justify-between text-sm text-neutral-700"
 >
-  <span>Shipping</span>
+  <span>Shipping (ex GST)</span>
   <span>{{ NumberFunctions.formatCurrency(checkoutPreview.shipping_charge, Currency.AUD) }}</span>
 </div>
 
@@ -243,11 +243,6 @@
   class="mt-4 flex justify-between border-t border-neutral-200 pt-4 font-bold text-neutral-950"
 >
   <span>Subtotal (ex GST)</span>
-  <span>{{ NumberFunctions.formatCurrency(checkoutPreview.discounted_subtotal, Currency.AUD) }}</span>
-</div>
-
-<div v-if="checkoutPreview" class="mt-3 flex justify-between text-sm text-neutral-700">
-  <span>Subtotal including shipping (ex GST)</span>
   <span>{{ NumberFunctions.formatCurrency(checkoutPreview.subtotal_ex_gst, Currency.AUD) }}</span>
 </div>
 
