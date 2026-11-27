@@ -174,6 +174,24 @@
               <p><strong>Currency:</strong> {{ testPaymentResult.currency }}</p>
             </div>
           </div>
+          <!-- Stripe Sandbox: uses an existing database payment, not the cart total. -->
+          <div v-if="isStagingWebsite" class="rounded-xl border border-indigo-200 bg-indigo-50 p-4 space-y-3">
+            <p class="text-sm font-semibold text-indigo-900">Stripe Sandbox — existing pending payment</p>
+            <p class="text-xs text-indigo-800">This creates a test checkout session for the saved payment ID. It does not charge a card or create a Zoho order.</p>
+            <label for="stripe-payment-id" class="block text-sm font-medium text-indigo-900">Existing Neon payment ID</label>
+            <UInput id="stripe-payment-id" v-model="stripePaymentId" class="w-full" placeholder="Pending payment UUID" :disabled="isCreatingStripeSession || stripeSessionAttempted" />
+            <UButton type="button" block color="primary" variant="solid"
+              :loading="isCreatingStripeSession" :disabled="!canCreateStripeSession"
+              @click="createStripeTestSession">Create Stripe Sandbox Session</UButton>
+            <p v-if="stripeSessionError" role="alert" class="text-sm text-red-700">{{ stripeSessionError }}</p>
+            <div v-if="stripeSessionResult" class="space-y-2 text-sm text-indigo-950 break-all">
+              <p><strong>Payment ID:</strong> {{ stripeSessionResult.payment_id }}</p>
+              <p><strong>Stripe Session ID:</strong> {{ stripeSessionResult.stripe_checkout_session_id }}</p>
+              <a :href="stripeSessionResult.payment_url" target="_blank" rel="noopener noreferrer"
+                class="inline-block rounded-lg bg-indigo-700 px-4 py-2 font-semibold text-white underline">Open Stripe TEST checkout</a>
+              <p class="text-xs">Only use Stripe test card details. Payment verification and Zoho fulfilment remain disabled.</p>
+            </div>
+          </div>
           <!-- Disabled Checkout Action when address is missing -->
           <div class="flex flex-col-reverse md:flex-row gap-4">
             <UButton variant="outline" class="w-full text-center px-10 justify-center">
@@ -322,6 +340,46 @@ const testPaymentResult = ref<{
   currency: string
 } | null>(null)
 const hasPreparedTestPayment = ref(false)
+const stripePaymentId = ref('a2592655-6f46-4250-b849-c26cb87ba000')
+const isCreatingStripeSession = ref(false)
+const stripeSessionAttempted = ref(false)
+const stripeSessionError = ref('')
+const stripeSessionResult = ref<{
+  payment_id: string
+  stripe_checkout_session_id: string
+  payment_url: string
+} | null>(null)
+const canCreateStripeSession = computed(() =>
+  isStagingWebsite.value && !isCreatingStripeSession.value && !stripeSessionAttempted.value &&
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(stripePaymentId.value.trim())
+)
+
+const createStripeTestSession = async () => {
+  if (!canCreateStripeSession.value) return
+  // Lock even after an ambiguous network error: the server may have created a session.
+  stripeSessionAttempted.value = true
+  isCreatingStripeSession.value = true
+  stripeSessionError.value = ''
+  try {
+    const response = await CartService.createStripeSession(stripePaymentId.value.trim())
+    const result = response?.data
+    if (!response?.success || !result?.stripe_checkout_session_id ||
+        !result?.payment_url || !result?.payment_id) {
+      throw new Error('Stripe session was not confirmed')
+    }
+    const checkoutUrl = new URL(result.payment_url)
+    if (checkoutUrl.protocol !== 'https:' ||
+        !(checkoutUrl.hostname === 'checkout.stripe.com' || checkoutUrl.hostname.endsWith('.checkout.stripe.com'))) {
+      throw new Error('Unexpected Stripe checkout URL')
+    }
+    stripeSessionResult.value = result
+  } catch {
+    stripeSessionError.value = 'Session not confirmed. Check the staging database and Stripe Sandbox before retrying. Do not click again.'
+  } finally {
+    isCreatingStripeSession.value = false
+  }
+}
+
 const canPrepareTestPayment = computed(() =>
   isStagingWebsite.value &&
   !isPreparingTestPayment.value &&
