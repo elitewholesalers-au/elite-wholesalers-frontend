@@ -22,6 +22,16 @@ export const CartService = {
     }
     return await ApiService.run({ method: ApiService.POST, url: '/cart/checkout/prepare', data })
   },
+  async createStripeSession(paymentId: string) {
+    if (typeof window === 'undefined' ||
+        window.location.hostname !== 'elite-wholesalers-frontend-staging.up.railway.app') {
+      throw new Error('Stripe Sandbox test is restricted to staging')
+    }
+    return await ApiService.run({
+      method: ApiService.POST,
+      url: `/cart/checkout/stripe-session/${encodeURIComponent(paymentId)}`
+    })
+  },
   async updateUserCart(cartId: string, data: { quantity: number }) {
     return await ApiService.run({ method: ApiService.PATCH, url: `/cart/${cartId}`, data })
   },
